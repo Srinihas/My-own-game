@@ -40,7 +40,8 @@ function draw() {
     }
    myFunction();
     } else if (gamestate == "end") {
-        obstaclesGroup.setVelocityEach = 0;
+        obstaclesGroup.setVelocityXEach(0);
+        obstaclesGroup.setLifetimeEach(-1);
     drawSprites();
 }
 
