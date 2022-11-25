@@ -19,6 +19,15 @@ function draw() {
     if (player.x >= 700 || player.x >= 0) {
         player.x = 350;
     }
-
+   myFunction();
     drawSprites();
+}
+
+function myFunction () {
+    
+    if (frameCount % 200 = 0) {
+        obstacle = createSprite(Math.round(random(0, 700)), -10, 1, 1);
+        ran = Math.round(random(0, 3);
+    }
+    
 }
