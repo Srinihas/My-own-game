@@ -1,4 +1,7 @@
 var x, y;
+x = windowWidth/2;
+y = windowHeight/2;
+
 var player, playerImg, ob1, ob2, ob3;
 var myBackground;
 var obstaclesGroup;
@@ -15,10 +18,6 @@ function preload(){
 }
 
 function setup() {
-
-    x = windowWidth/2;
-    y = windowHeight/2;
-
     createCanvas(windowWidth, windowHeight);
     player = createSprite(windowHeight-30, windowWidth/2, 10, 10);
     player.addImage(playerImg);
@@ -59,12 +58,18 @@ function draw() {
         text("Sorry, but the game is over", 300, 350);
         obstaclesGroup.setVelocityYEach(0);
         obstaclesGroup.setLifetimeEach(-1);
-
+        
         if (mousePressedOver(myBackground)) {
             gamestate = "play";
         }
     }
     drawSprites();
+}
+
+function showText () {
+    fill("black");
+    stroke("black");
+    text(+hearts, x, y);
 }
 
 function obstacleSpawn () {
