@@ -1,13 +1,13 @@
-var x, y;
-x = windowWidth/2;
-y = windowHeight/2;
+var starImg, starsGroup;
 
 var player, playerImg, ob1, ob2, ob3;
 var myBackground;
 var obstaclesGroup;
 
+var heartSprite1, heartSprite2;
+
 var gamestate = "play";
-var hearts = 3;
+var hearts = 3, heartSprite;
 
 function preload(){
     playerImg = loadImage("My project (8).png");
@@ -15,6 +15,7 @@ function preload(){
     ob2 = loadImage("My project (7).png");
     ob3 = loadImage("My project (9).png");
     heartsImg = loadImage("download (5).png");
+    starImg = loadImage("My project (10).png");
 }
 
 function setup() {
@@ -23,8 +24,20 @@ function setup() {
     player.addImage(playerImg);
     player.scale = 0.30;
 
-    myBackground = createSprite(y, x, height, width);
+    myBackground = createSprite(windowWidth/2, windowHeight/2, height, width);
     myBackground.shapeColor = rgb(112, 201, 201);
+
+    heartSprite = createSprite(150, 50, 1, 1);
+    heartSprite.addImage(heartsImg);
+    heartSprite.scale = 0.1;
+
+    heartSprite1 = createSprite(50, 50, 1, 1);
+    heartSprite1.addImage(heartsImg);
+    heartSprite1.scale = 0.1;
+
+    heartSprite2 = createSprite(100, 50, 1, 1);
+    heartSprite2.addImage(heartsImg);
+    heartSprite2.scale = 0.1;
 
     obstaclesGroup = new Group();
 }
@@ -51,7 +64,10 @@ function draw() {
             obstaclesGroup.destroyEach();
         }
 
+        stars();
+
         obstacleSpawn();
+    
     } else if (gamestate == "end") {
         fill("White");
         stroke("Black");
@@ -64,12 +80,6 @@ function draw() {
         }
     }
     drawSprites();
-}
-
-function showText () {
-    fill("black");
-    stroke("black");
-    text(+hearts, x, y);
 }
 
 function obstacleSpawn () {
@@ -93,4 +103,16 @@ function obstacleSpawn () {
         obstaclesGroup.add(obstacle);
     }
     
+}
+
+function stars () {
+    if (frameCount % 90 === 0) {
+        var star = createSprite(Math.round(random(0, width)), -10, 1, 1);
+        star.addImage(starImg);
+
+        star.lifetime = 710;
+        star.velocityY = Math.round(frameCount % 50);
+
+    starsGroup.add(star);
+    }
 }
