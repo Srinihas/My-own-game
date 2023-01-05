@@ -9,6 +9,8 @@ var heartSprite1, heartSprite2;
 var gamestate = "play";
 var hearts = 3, heartSprite;
 
+var score = 0;
+
 function preload(){
     playerImg = loadImage("My project (8).png");
     ob1 = loadImage("My project (6).png");
@@ -49,7 +51,9 @@ function draw() {
     
     if (gamestate === "play") {
         
-        obstaclesGroup.setVelocityYEach(4);
+        if (obstaclesGroup.x == windowHeight) {
+            score = score+1;
+        }
 
         player.x = World.mouseX;
         player.y = World.mouseY;
@@ -71,7 +75,7 @@ function draw() {
     } else if (gamestate == "end") {
         fill("White");
         stroke("Black");
-        text("Sorry, but the game is over", 300, 350);
+        text("Game over. Score: "+score, 300, 350);
         obstaclesGroup.setVelocityYEach(0);
         obstaclesGroup.setLifetimeEach(-1);
         
@@ -89,7 +93,7 @@ function obstacleSpawn () {
 
         var ran = Math.round(random(1, 3));
         
-        obstacle.lifetime = 710;
+        obstacle.lifetime = windowHeight+10;
         obstacle.velocityY = Math.round(frameCount % 50);
         switch (ran) {
             case 1: obstacle.addImage(ob1), obstacle.scale = 0.5;
