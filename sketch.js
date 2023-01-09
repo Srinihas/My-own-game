@@ -108,15 +108,3 @@ function obstacleSpawn () {
     }
     
 }
-
-function stars () {
-    if (frameCount % 90 === 0) {
-        var star = createSprite(Math.round(random(0, width)), -10, 1, 1);
-        star.addImage(starImg);
-
-        star.lifetime = 710;
-        star.velocityY = Math.round(frameCount % 50);
-
-    starsGroup.add(star);
-    }
-}
